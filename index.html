@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BT FURNITURE | เฟอร์นิเจอร์หรู</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#faf9f6;color:#29251f}
+header{background:#fff;padding:20px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee}
+.logo{font-size:23px;font-weight:bold;letter-spacing:2px}
+.logo span{color:#b99a60}
+nav a{margin-left:20px;text-decoration:none;color:#333;font-size:14px}
+.hero{padding:90px 8%;background:#eee8dc;text-align:center}
+.hero p{color:#927b55;letter-spacing:4px;margin-bottom:15px}
+.hero h1{font-size:42px;margin-bottom:18px}
+.hero h2{font-size:18px;font-weight:normal;margin-bottom:28px}
+.btn{display:inline-block;background:#b99a60;color:white;padding:14px 30px;text-decoration:none;border-radius:3px}
+section{padding:55px 7%}
+.heading{text-align:center;margin-bottom:35px}
+.heading h2{font-size:28px;margin-bottom:10px}
+.heading p{color:#888}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.product{background:white;padding-bottom:20px;text-align:center}
+.product img{width:100%;height:230px;object-fit:cover}
+.product h3{margin:16px 5px 8px}
+.price{color:#ad8950;font-weight:bold}
+footer{background:#29251f;color:white;text-align:center;padding:30px}
+@media(max-width:650px){
+header{padding:18px 5%;flex-direction:column;gap:15px}
+nav a{margin:0 8px}
+.hero{padding:65px 5%}
+.hero h1{font-size:30px}
+.grid{grid-template-columns:repeat(2,1fr);gap:12px}
+.product img{height:160px}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">BT <span>FURNITURE</span></div>
+<nav>
+<a href="#">หน้าแรก</a>
+<a href="#products">สินค้า</a>
+<a href="#about">เกี่ยวกับเรา</a>
+</nav>
+</header>
+
+<div class="hero">
+<p>BEAUTIFUL LIVING</p>
+<h1>เติมเต็มบ้านในสไตล์ที่คุณรัก</h1>
+<h2>เฟอร์นิเจอร์ดีไซน์หรู เรียบง่าย และมีระดับ</h2>
+<a href="#products" class="btn">เลือกชมสินค้า</a>
+</div>
+
+<section id="products">
+<div class="heading">
+<h2>สินค้าแนะนำ</h2>
+<p>คัดสรรเฟอร์นิเจอร์เพื่อบ้านที่สมบูรณ์แบบ</p>
+</div>
+<div class="grid">
+<div class="product">
+<img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600" alt="โซฟา">
+<h3>โซฟาสไตล์โมเดิร์น</h3>
+<p class="price">฿12,900</p>
+</div>
+<div class="product">
+<img src="https://images.unsplash.com/photo-1499933374294-4584851497cc?w=600" alt="โต๊ะ">
+<h3>โต๊ะทำงานมินิมอล</h3>
+<p class="price">฿5,900</p>
+</div>
+<div class="product">
+<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600" alt="เตียง">
+<h3>ห้องนอนสไตล์หรู</h3>
+<p class="price">฿18,900</p>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="heading">
+<h2>BT FURNITURE</h2>
+<p>สร้างพื้นที่แห่งความสุข ด้วยเฟอร์นิเจอร์ที่มีคุณภาพ</p>
+</div>
+</section>
+
+<footer>
+<p>© 2026 BT FURNITURE</p>
+<p>ขอบคุณที่เลือกให้เราเป็นส่วนหนึ่งของบ้านคุณ</p>
+</footer>
+</body>
+</html>
