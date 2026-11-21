@@ -205,5 +205,16 @@ alert("รับข้อมูลคำสั่งซื้อทดลอง�
 renderProducts();
 updateCart();
 </script>
+
+<!-- เชื่อมต่อ Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const supabaseClient = window.supabase.createClient(
+    "https://luzkbdghxpspyahxivvg.supabase.co",
+    "sb_publishable_bIB_DAPyu3M6faPuX1_1SQ__iaXNG7y"
+  );
+  console.log("เชื่อมต่อ Supabase พร้อมแล้ว");
+</script>
+
 </body>
 </html>
