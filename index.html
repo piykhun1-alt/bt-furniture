@@ -3,91 +3,207 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BT FURNITURE | เฟอร์นิเจอร์หรู</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BT FURNITURE | ร้านเฟอร์นิเจอร์</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#faf9f6;color:#29251f}
-header{background:#fff;padding:20px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee}
+*{box-sizing:border-box}
+body{margin:0;background:#faf9f6;color:#302b24;font-family:Arial,sans-serif}
+header{background:#fff;padding:18px 6%;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:5;box-shadow:0 2px 10px #ddd}
 .logo{font-size:23px;font-weight:bold;letter-spacing:2px}
-.logo span{color:#b99a60}
-nav a{margin-left:20px;text-decoration:none;color:#333;font-size:14px}
-.hero{padding:90px 8%;background:#eee8dc;text-align:center}
-.hero p{color:#927b55;letter-spacing:4px;margin-bottom:15px}
-.hero h1{font-size:42px;margin-bottom:18px}
-.hero h2{font-size:18px;font-weight:normal;margin-bottom:28px}
-.btn{display:inline-block;background:#b99a60;color:white;padding:14px 30px;text-decoration:none;border-radius:3px}
-section{padding:55px 7%}
-.heading{text-align:center;margin-bottom:35px}
-.heading h2{font-size:28px;margin-bottom:10px}
-.heading p{color:#888}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.product{background:white;padding-bottom:20px;text-align:center}
-.product img{width:100%;height:230px;object-fit:cover}
-.product h3{margin:16px 5px 8px}
-.price{color:#ad8950;font-weight:bold}
-footer{background:#29251f;color:white;text-align:center;padding:30px}
-@media(max-width:650px){
-header{padding:18px 5%;flex-direction:column;gap:15px}
-nav a{margin:0 8px}
-.hero{padding:65px 5%}
-.hero h1{font-size:30px}
-.grid{grid-template-columns:repeat(2,1fr);gap:12px}
-.product img{height:160px}
+.logo span{color:#b49760}
+button{cursor:pointer;border:0}
+.cart-btn,.buy{background:#b49760;color:white;padding:12px 18px;border-radius:4px}
+.hero{background:#eee8dc;text-align:center;padding:65px 15px}
+.hero p{letter-spacing:4px;color:#927b55}
+.hero h1{font-size:35px}
+.hero button{background:#302b24;color:white;padding:14px 25px}
+h2{text-align:center;margin:40px 0 10px}
+.sub{text-align:center;color:#888;margin-bottom:30px}
+.products{padding:15px 6% 50px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:white;border:1px solid #eee;padding-bottom:18px}
+.card img{width:100%;height:220px;object-fit:cover}
+.card h3{padding:0 14px;margin-bottom:5px}
+.price{color:#ad8950;font-weight:bold;padding:0 14px}
+.options{padding:0 14px}
+select,input,textarea{width:100%;padding:11px;border:1px solid #ddd;border-radius:4px;margin:6px 0;background:white}
+.card button{width:calc(100% - 28px);margin:5px 14px;padding:12px;background:#302b24;color:white;border-radius:3px}
+.card button.buy{background:#b49760}
+.panel{background:white;padding:22px;margin:20px auto;max-width:650px;border:1px solid #eee}
+.item{border-bottom:1px solid #eee;padding:12px 0}
+.item button{background:#eee;padding:6px 10px}
+.total{font-size:20px;font-weight:bold;text-align:right;margin:20px 0}
+.hidden{display:none}
+#checkout{scroll-margin-top:90px}
+footer{background:#302b24;color:white;text-align:center;padding:30px}
+@media(max-width:700px){
+.products{grid-template-columns:repeat(2,1fr);gap:12px;padding:12px}
+.card img{height:145px}
+.card h3{font-size:15px}
+.hero h1{font-size:27px}
+header{padding:15px}
+.logo{font-size:18px}
 }
+@media(max-width:380px){.products{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+
 <header>
 <div class="logo">BT <span>FURNITURE</span></div>
-<nav>
-<a href="#">หน้าแรก</a>
-<a href="#products">สินค้า</a>
-<a href="#about">เกี่ยวกับเรา</a>
-</nav>
+<button class="cart-btn" onclick="showCart()">🛒 ตะกร้า (<span id="count">0</span>)</button>
 </header>
 
 <div class="hero">
 <p>BEAUTIFUL LIVING</p>
 <h1>เติมเต็มบ้านในสไตล์ที่คุณรัก</h1>
-<h2>เฟอร์นิเจอร์ดีไซน์หรู เรียบง่าย และมีระดับ</h2>
-<a href="#products" class="btn">เลือกชมสินค้า</a>
+<p>เฟอร์นิเจอร์ดีไซน์หรู เรียบง่าย และมีระดับ</p>
+<button onclick="document.getElementById('products').scrollIntoView()">เลือกชมสินค้า</button>
 </div>
 
-<section id="products">
-<div class="heading">
-<h2>สินค้าแนะนำ</h2>
-<p>คัดสรรเฟอร์นิเจอร์เพื่อบ้านที่สมบูรณ์แบบ</p>
-</div>
-<div class="grid">
-<div class="product">
-<img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600" alt="โซฟา">
-<h3>โซฟาสไตล์โมเดิร์น</h3>
-<p class="price">฿12,900</p>
-</div>
-<div class="product">
-<img src="https://images.unsplash.com/photo-1499933374294-4584851497cc?w=600" alt="โต๊ะ">
-<h3>โต๊ะทำงานมินิมอล</h3>
-<p class="price">฿5,900</p>
-</div>
-<div class="product">
-<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600" alt="เตียง">
-<h3>ห้องนอนสไตล์หรู</h3>
-<p class="price">฿18,900</p>
-</div>
-</div>
+<h2 id="products">เฟอร์นิเจอร์ของเรา</h2>
+<p class="sub">เลือกเฟอร์นิเจอร์ที่ใช่ สำหรับบ้านที่คุณรัก</p>
+
+<div class="products" id="productList"></div>
+
+<section id="cart" class="panel hidden">
+<h2>ตะกร้าสินค้าของคุณ</h2>
+<div id="cartItems"></div>
+<div class="total" id="total">รวม ฿0</div>
+<button class="cart-btn" style="width:100%" onclick="goCheckout()">ดำเนินการสั่งซื้อ</button>
 </section>
 
-<section id="about">
-<div class="heading">
-<h2>BT FURNITURE</h2>
-<p>สร้างพื้นที่แห่งความสุข ด้วยเฟอร์นิเจอร์ที่มีคุณภาพ</p>
-</div>
+<section id="checkout" class="panel hidden">
+<h2>ข้อมูลการจัดส่ง</h2>
+<form id="orderForm">
+<label>ชื่อ - นามสกุล</label>
+<input id="customerName" required placeholder="กรอกชื่อผู้รับสินค้า">
+<label>เบอร์โทรศัพท์</label>
+<input id="phone" required type="tel" placeholder="กรอกเบอร์โทรศัพท์">
+<label>ที่อยู่จัดส่ง</label>
+<textarea id="address" required placeholder="บ้านเลขที่ ถนน ตำบล อำเภอ จังหวัด"></textarea>
+<label>วิธีชำระเงิน</label>
+<select id="payment">
+<option value="เก็บเงินปลายทาง">เก็บเงินปลายทาง</option>
+<option value="โอนเงินผ่านธนาคาร">โอนเงินผ่านธนาคาร</option>
+<option value="PromptPay">PromptPay</option>
+</select>
+<div class="total" id="checkoutTotal"></div>
+<button class="cart-btn" style="width:100%" type="submit">ยืนยันคำสั่งซื้อ</button>
+</form>
+<p style="font-size:12px;color:#888">* ระบบตัวอย่างนี้ยังไม่ส่งคำสั่งซื้อไปยังร้านค้าจริง</p>
 </section>
 
 <footer>
+<h3>BT FURNITURE</h3>
+<p>เฟอร์นิเจอร์ที่ทำให้บ้านเป็นบ้าน</p>
 <p>© 2026 BT FURNITURE</p>
-<p>ขอบคุณที่เลือกให้เราเป็นส่วนหนึ่งของบ้านคุณ</p>
 </footer>
+
+<script>
+const products=[
+{id:1,name:"โซฟาโมเดิร์น",price:12900,img:"https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700",colors:["ครีม","เทา","น้ำตาล"]},
+{id:2,name:"โต๊ะทำงานมินิมอล",price:5900,img:"https://images.unsplash.com/photo-1499933374294-4584851497cc?w=700",colors:["ไม้ธรรมชาติ","ขาว","ดำ"]},
+{id:3,name:"เตียงนอนสไตล์หรู",price:18900,img:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=700",colors:["ครีม","เทา","น้ำตาล"]},
+{id:4,name:"เก้าอี้รับประทานอาหาร",price:2500,img:"https://images.unsplash.com/photo-1503602642458-232111445657?w=700",colors:["ขาว","ดำ","ไม้ธรรมชาติ"]},
+{id:5,name:"ตู้เสื้อผ้าโมเดิร์น",price:8900,img:"https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=700",colors:["ขาว","น้ำตาล","เทา"]},
+{id:6,name:"โต๊ะกลางห้องนั่งเล่น",price:3900,img:"https://images.unsplash.com/photo-1499933374294-4584851497cc?w=700",colors:["ไม้ธรรมชาติ","ดำ","ขาว"]},
+{id:7,name:"ชั้นวางทีวี",price:4500,img:"https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=700",colors:["น้ำตาล","ขาว","ดำ"]},
+{id:8,name:"ตู้เก็บของอเนกประสงค์",price:5200,img:"https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=700",colors:["ครีม","ไม้ธรรมชาติ","เทา"]},
+{id:9,name:"โคมไฟตั้งพื้น",price:1800,img:"https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=700",colors:["ทอง","ดำ","ขาว"]},
+{id:10,name:"โต๊ะรับประทานอาหาร",price:10900,img:"https://images.unsplash.com/photo-1617806118233-18e1de247200?w=700",colors:["ไม้ธรรมชาติ","ดำ","ขาว"]}
+];
+
+let cart=[];
+
+function money(n){return "฿"+n.toLocaleString("th-TH")}
+
+function renderProducts(){
+document.getElementById("productList").innerHTML=products.map(p=>`
+<div class="card">
+<img src="${p.img}" alt="${p.name}" loading="lazy">
+<h3>${p.name}</h3>
+<p class="price">${money(p.price)}</p>
+<div class="options">
+<label>เลือกสี</label>
+<select id="color${p.id}">
+${p.colors.map(c=>`<option>${c}</option>`).join("")}
+</select>
+<label>จำนวน</label>
+<input id="qty${p.id}" type="number" min="1" max="99" value="1">
+</div>
+<button onclick="addCart(${p.id})">เพิ่มลงตะกร้า</button>
+<button class="buy" onclick="buyNow(${p.id})">สั่งซื้อเลย</button>
+</div>`).join("");
+}
+
+function addCart(id){
+const p=products.find(x=>x.id===id);
+const color=document.getElementById("color"+id).value;
+const qty=Math.max(1,Math.min(99,Number(document.getElementById("qty"+id).value)||1));
+const found=cart.find(x=>x.id===id&&x.color===color);
+if(found)found.qty+=qty;
+else cart.push({id,name:p.name,price:p.price,color,qty});
+updateCart();
+alert("เพิ่มสินค้าในตะกร้าแล้ว");
+}
+
+function buyNow(id){
+cart=[];
+addCart(id);
+showCart();
+document.getElementById("cart").scrollIntoView();
+}
+
+function updateCart(){
+document.getElementById("count").textContent=cart.reduce((s,x)=>s+x.qty,0);
+document.getElementById("cartItems").innerHTML=cart.length?cart.map((x,i)=>`
+<div class="item">
+<strong>${x.name}</strong><br>
+สี: ${x.color} | ${money(x.price)} × ${x.qty}
+<br>
+<button onclick="changeQty(${i},-1)">−</button>
+<button onclick="changeQty(${i},1)">+</button>
+<button onclick="removeItem(${i})">ลบ</button>
+</div>`).join(""):"ยังไม่มีสินค้าในตะกร้า";
+const sum=cart.reduce((s,x)=>s+x.price*x.qty,0);
+document.getElementById("total").textContent="รวม "+money(sum);
+document.getElementById("checkoutTotal").textContent="ยอดชำระ "+money(sum);
+}
+
+function changeQty(i,n){
+cart[i].qty+=n;
+if(cart[i].qty<=0)cart.splice(i,1);
+updateCart();
+}
+function removeItem(i){cart.splice(i,1);updateCart();}
+function showCart(){
+document.getElementById("cart").classList.remove("hidden");
+document.getElementById("checkout").classList.add("hidden");
+updateCart();
+document.getElementById("cart").scrollIntoView();
+}
+function goCheckout(){
+if(!cart.length){alert("กรุณาเลือกสินค้าก่อน");return;}
+document.getElementById("checkout").classList.remove("hidden");
+updateCart();
+document.getElementById("checkout").scrollIntoView();
+}
+
+document.getElementById("orderForm").addEventListener("submit",function(e){
+e.preventDefault();
+if(!cart.length){alert("ไม่มีสินค้าในตะกร้า");return;}
+const order={
+name:document.getElementById("customerName").value,
+phone:document.getElementById("phone").value,
+address:document.getElementById("address").value,
+payment:document.getElementById("payment").value,
+items:cart,
+total:cart.reduce((s,x)=>s+x.price*x.qty,0)
+};
+alert("รับข้อมูลคำสั่งซื้อทดลองแล้ว\nชื่อ: "+order.name+"\nยอดรวม: "+money(order.total)+"\n\nขณะนี้ยังไม่ได้ส่งคำสั่งซื้อไปยังร้านค้าจริง");
+});
+renderProducts();
+updateCart();
+</script>
 </body>
 </html>
