@@ -4,74 +4,409 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BT FURNITURE | ร้านเฟอร์นิเจอร์</title>
+<title>BT FURNITURE | Premium Furniture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
+:root{
+  --cream:#f7f5f0;
+  --white:#fff;
+  --dark:#29251f;
+  --brown:#756044;
+  --gold:#b69a69;
+  --muted:#8c877e;
+  --line:#e9e5dc;
+  --shadow:0 15px 40px rgba(45,37,26,.08);
+}
 *{box-sizing:border-box}
-body{margin:0;background:#faf9f6;color:#302b24;font-family:Arial,sans-serif}
-header{background:#fff;padding:18px 6%;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:5;box-shadow:0 2px 10px #ddd}
-.logo{font-size:23px;font-weight:bold;letter-spacing:2px}
-.logo span{color:#b49760}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--dark);
+  font-family:'Kanit',Arial,sans-serif;
+  font-weight:300;
+}
+button,input,select,textarea{font:inherit}
 button{cursor:pointer;border:0}
 button:disabled{opacity:.6;cursor:not-allowed}
-.cart-btn,.buy{background:#b49760;color:white;padding:12px 18px;border-radius:4px}
-.hero{background:#eee8dc;text-align:center;padding:65px 15px}
-.hero p{letter-spacing:2px;color:#927b55}
-.hero h1{font-size:35px}
-.hero button{background:#302b24;color:white;padding:14px 25px}
-h2{text-align:center;margin:40px 0 10px}
-.sub{text-align:center;color:#888;margin-bottom:30px}
-.products{padding:15px 6% 50px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.card{background:white;border:1px solid #eee;padding-bottom:18px;min-width:0}
-.card img{width:100%;height:220px;object-fit:cover;background:#f1eee8}
-.card h3{padding:0 14px;margin-bottom:5px}
-.description{padding:0 14px;color:#777;font-size:13px;min-height:34px}
-.price{color:#ad8950;font-weight:bold;padding:0 14px}
-.options{padding:0 14px}
-select,input,textarea{width:100%;padding:11px;border:1px solid #ddd;border-radius:4px;margin:6px 0;background:white}
-.card button{width:calc(100% - 28px);margin:5px 14px;padding:12px;background:#302b24;color:white;border-radius:3px}
-.card button.buy{background:#b49760}
-.panel{background:white;padding:22px;margin:20px auto;max-width:650px;border:1px solid #eee}
-.item{border-bottom:1px solid #eee;padding:12px 0}
-.item button{background:#eee;padding:6px 10px;margin:5px}
-.total{font-size:20px;font-weight:bold;text-align:right;margin:20px 0}
-.hidden{display:none}
-#checkout{scroll-margin-top:90px}
-footer{background:#302b24;color:white;text-align:center;padding:30px}
-.status{text-align:center;padding:35px;color:#887653}
-.error{color:#b33}
-@media(max-width:700px){
-.products{grid-template-columns:repeat(2,1fr);gap:12px;padding:12px}
-.card img{height:145px}
-.card h3{font-size:15px}
-.hero h1{font-size:27px}
-header{padding:15px}
-.logo{font-size:18px}
+a{color:inherit;text-decoration:none}
+
+.topbar{
+  background:var(--dark);
+  color:#e9dfcd;
+  text-align:center;
+  padding:8px 12px;
+  font-size:12px;
+  letter-spacing:1.5px;
 }
-@media(max-width:380px){.products{grid-template-columns:1fr}}
+header{
+  background:rgba(255,255,255,.96);
+  padding:17px 7%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:20;
+  box-shadow:0 3px 20px rgba(0,0,0,.04);
+  backdrop-filter:blur(12px);
+}
+.logo{
+  font-size:25px;
+  font-weight:600;
+  letter-spacing:2px;
+  line-height:1;
+}
+.logo span{color:var(--gold)}
+.logo small{
+  display:block;
+  font-size:9px;
+  font-weight:300;
+  letter-spacing:4px;
+  color:#999;
+  margin-top:7px;
+}
+.nav{
+  display:flex;
+  align-items:center;
+  gap:30px;
+  font-size:14px;
+}
+.nav a{transition:.2s}
+.nav a:hover{color:var(--gold)}
+.cart-btn,.primary-btn{
+  background:var(--dark);
+  color:white;
+  padding:12px 22px;
+  border-radius:2px;
+  transition:.25s;
+}
+.cart-btn:hover,.primary-btn:hover{
+  background:var(--gold);
+  transform:translateY(-2px);
+}
+.cart-btn{white-space:nowrap}
+.cart-btn span{color:#e5c995;font-weight:500}
+
+.hero{
+  min-height:510px;
+  display:flex;
+  align-items:center;
+  padding:70px 9%;
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(27,24,20,.76),rgba(27,24,20,.18)),
+    url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1800') center/cover;
+  color:white;
+}
+.hero-content{max-width:620px;position:relative;z-index:1}
+.hero-kicker{
+  color:#e2c997;
+  letter-spacing:5px;
+  font-size:12px;
+  margin-bottom:20px;
+}
+.hero h1{
+  font-family:'Playfair Display','Kanit',serif;
+  font-size:clamp(38px,5vw,65px);
+  line-height:1.2;
+  font-weight:600;
+  margin:0 0 20px;
+}
+.hero p{
+  color:#eee8df;
+  line-height:2;
+  font-size:15px;
+  max-width:470px;
+}
+.hero .primary-btn{
+  display:inline-block;
+  margin-top:20px;
+  background:var(--gold);
+  padding:15px 30px;
+}
+.hero .primary-btn:hover{background:white;color:var(--dark)}
+
+.features{
+  background:white;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  padding:27px 8%;
+  gap:20px;
+  border-bottom:1px solid var(--line);
+}
+.feature{text-align:center}
+.feature strong{display:block;font-size:14px;font-weight:500}
+.feature span{font-size:12px;color:var(--muted)}
+
+.section-heading{text-align:center;padding:70px 15px 25px}
+.eyebrow{
+  color:var(--gold);
+  font-size:11px;
+  letter-spacing:4px;
+  font-weight:500;
+}
+.section-heading h2{
+  font-family:'Playfair Display','Kanit',serif;
+  font-size:36px;
+  font-weight:600;
+  margin:10px 0;
+}
+.section-heading p{color:var(--muted);font-size:14px;margin:0}
+
+.products{
+  padding:25px 7% 75px;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:28px;
+}
+.card{
+  background:white;
+  min-width:0;
+  position:relative;
+  overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+  border:1px solid #efede8;
+}
+.card:hover{
+  transform:translateY(-7px);
+  box-shadow:var(--shadow);
+}
+.product-image{
+  position:relative;
+  overflow:hidden;
+  background:#efede8;
+}
+.card img{
+  display:block;
+  width:100%;
+  height:270px;
+  object-fit:cover;
+  transition:transform .5s;
+}
+.card:hover img{transform:scale(1.045)}
+.product-tag{
+  position:absolute;
+  top:15px;
+  left:15px;
+  background:rgba(255,255,255,.92);
+  color:var(--brown);
+  padding:5px 12px;
+  font-size:10px;
+  letter-spacing:1px;
+}
+.card-content{padding:19px}
+.card h3{
+  margin:0 0 7px;
+  font-size:18px;
+  font-weight:500;
+}
+.description{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.8;
+  min-height:42px;
+  margin:0 0 12px;
+}
+.price{
+  color:var(--gold);
+  font-size:20px;
+  font-weight:600;
+  margin:0 0 17px;
+}
+.options label{
+  display:block;
+  font-size:12px;
+  color:#716b60;
+  margin-top:8px;
+}
+select,input,textarea{
+  width:100%;
+  padding:11px 12px;
+  border:1px solid var(--line);
+  border-radius:2px;
+  margin:5px 0;
+  background:white;
+  color:var(--dark);
+  outline:none;
+}
+select:focus,input:focus,textarea:focus{border-color:var(--gold)}
+.card-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}
+.card-actions button{
+  padding:11px 5px;
+  background:var(--dark);
+  color:white;
+  font-size:12px;
+  transition:.2s;
+}
+.card-actions button:hover{background:var(--brown)}
+.card-actions button.buy{background:var(--gold)}
+.card-actions button.buy:hover{background:var(--dark)}
+
+.panel{
+  background:white;
+  padding:35px;
+  margin:25px auto 55px;
+  max-width:760px;
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+}
+.panel h2{
+  font-family:'Playfair Display','Kanit',serif;
+  font-size:29px;
+  text-align:center;
+  margin:0 0 25px;
+}
+.item{
+  border-bottom:1px solid var(--line);
+  padding:17px 0;
+  line-height:1.9;
+  font-size:14px;
+}
+.item button{
+  background:#f0eee9;
+  padding:6px 13px;
+  margin:7px 5px 0 0;
+}
+.item button:hover{background:var(--gold);color:white}
+.total{
+  font-size:22px;
+  font-weight:500;
+  text-align:right;
+  margin:25px 0;
+  color:var(--brown);
+}
+.form-group{margin-bottom:16px}
+.form-group label{
+  display:block;
+  font-size:13px;
+  font-weight:400;
+  margin-bottom:5px;
+}
+textarea{min-height:105px;resize:vertical}
+.hidden{display:none!important}
+#cart,#checkout{scroll-margin-top:110px}
+.status{
+  grid-column:1/-1;
+  text-align:center;
+  padding:50px 15px;
+  color:var(--muted);
+}
+.error{color:#b33}
+footer{
+  background:var(--dark);
+  color:white;
+  text-align:center;
+  padding:48px 15px;
+}
+footer .footer-logo{
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  letter-spacing:3px;
+}
+footer .footer-logo span{color:var(--gold)}
+footer p{color:#c5bfb4;font-size:13px}
+.footer-line{
+  width:45px;
+  height:1px;
+  background:var(--gold);
+  margin:20px auto;
+}
+.copyright{
+  font-size:11px;
+  color:#918a7e;
+  margin-top:25px;
+}
+@media(max-width:850px){
+  .products{grid-template-columns:repeat(2,minmax(0,1fr));padding-left:4%;padding-right:4%;gap:15px}
+  header{padding:15px 4%}
+  .nav{gap:15px}
+  .hero{min-height:430px;padding:60px 7%}
+}
+@media(max-width:600px){
+  .topbar{font-size:10px}
+  header{padding:14px 4%}
+  .logo{font-size:19px}
+  .logo small{font-size:8px}
+  .nav{display:none}
+  .cart-btn{padding:10px 13px;font-size:12px}
+  .hero{min-height:410px;padding:55px 7%;background-position:60% center}
+  .hero h1{font-size:39px}
+  .hero p{font-size:13px}
+  .features{padding:20px 8px;gap:8px}
+  .feature strong{font-size:11px}
+  .feature span{font-size:9px}
+  .section-heading{padding:50px 10px 18px}
+  .section-heading h2{font-size:29px}
+  .products{padding:15px 12px 50px;gap:12px}
+  .card img{height:155px}
+  .card-content{padding:12px}
+  .card h3{font-size:14px}
+  .description{font-size:10px;min-height:38px}
+  .price{font-size:17px}
+  .options label{font-size:11px}
+  select,input,textarea{padding:9px;font-size:12px}
+  .card-actions{grid-template-columns:1fr;gap:6px}
+  .card-actions button{padding:10px}
+  .panel{margin:15px 12px 40px;padding:22px 17px}
+  .panel h2{font-size:25px}
+  .total{font-size:19px}
+}
+@media(max-width:360px){
+  .products{grid-template-columns:1fr}
+  .card img{height:220px}
+}
 </style>
 </head>
 
 <body>
 
+<div class="topbar">DESIGN YOUR HOME · LIVE BEAUTIFULLY · BT FURNITURE</div>
+
 <header>
-  <div class="logo">BT <span>FURNITURE</span></div>
-  <button class="cart-btn" onclick="showCart()">
-    🛒 ตะกร้า (<span id="count">0</span>)
-  </button>
+  <a href="#" class="logo">BT <span>FURNITURE</span><small>PREMIUM LIVING</small></a>
+  <nav class="nav">
+    <a href="#">หน้าแรก</a>
+    <a href="#products">สินค้า</a>
+    <a href="#footer">เกี่ยวกับเรา</a>
+  </nav>
+  <button class="cart-btn" onclick="showCart()">🛒 ตะกร้า (<span id="count">0</span>)</button>
 </header>
 
-<div class="hero">
-  <p>BEAUTIFUL LIVING</p>
-  <h1>เติมเต็มบ้านในสไตล์ที่คุณรัก</h1>
-  <p>เฟอร์นิเจอร์ดีไซน์หรู เรียบง่าย และมีระดับ</p>
-  <button onclick="document.getElementById('products').scrollIntoView()">
-    เลือกชมสินค้า
-  </button>
-</div>
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-kicker">BEAUTIFUL LIVING</div>
+    <h1>เติมเต็มบ้าน<br>ในสไตล์ที่คุณรัก</h1>
+    <p>สัมผัสความลงตัวของดีไซน์และความสะดวกสบาย
+    ด้วยเฟอร์นิเจอร์ที่ช่วยสร้างบรรยากาศพิเศษให้ทุกมุมของบ้าน</p>
+    <a class="primary-btn" href="#products">เลือกชมสินค้า &nbsp; →</a>
+  </div>
+</section>
 
-<h2 id="products">เฟอร์นิเจอร์ของเรา</h2>
-<p class="sub">เลือกเฟอร์นิเจอร์ที่ใช่ สำหรับบ้านที่คุณรัก</p>
+<section class="features">
+  <div class="feature">
+    <strong>✦ ดีไซน์มีเอกลักษณ์</strong>
+    <span>สวยงาม เรียบหรู มีสไตล์</span>
+  </div>
+  <div class="feature">
+    <strong>✧ เลือกสีได้ตามใจ</strong>
+    <span>เลือกแบบที่เข้ากับบ้านคุณ</span>
+  </div>
+  <div class="feature">
+    <strong>⌂ สั่งซื้อสะดวก</strong>
+    <span>กรอกข้อมูลจัดส่งได้ง่าย</span>
+  </div>
+</section>
+
+<section class="section-heading" id="products">
+  <div class="eyebrow">OUR COLLECTION</div>
+  <h2>เฟอร์นิเจอร์ของเรา</h2>
+  <p>เลือกเฟอร์นิเจอร์ที่ใช่ สำหรับบ้านที่คุณรัก</p>
+</section>
 
 <div id="productList" class="products">
   <div class="status">กำลังโหลดสินค้า...</div>
@@ -82,29 +417,36 @@ header{padding:15px}
   <div id="cartItems"></div>
   <div class="total" id="total">รวม ฿0</div>
   <button class="cart-btn" style="width:100%" onclick="goCheckout()">
-    ดำเนินการสั่งซื้อ
+    ดำเนินการสั่งซื้อ →
   </button>
 </section>
 
 <section id="checkout" class="panel hidden">
   <h2>ข้อมูลการจัดส่ง</h2>
-
   <form id="orderForm">
-    <label>ชื่อ - นามสกุล</label>
-    <input id="customerName" required placeholder="กรอกชื่อผู้รับสินค้า">
+    <div class="form-group">
+      <label>ชื่อ - นามสกุล</label>
+      <input id="customerName" required placeholder="กรอกชื่อผู้รับสินค้า">
+    </div>
 
-    <label>เบอร์โทรศัพท์</label>
-    <input id="phone" required type="tel" placeholder="กรอกเบอร์โทรศัพท์">
+    <div class="form-group">
+      <label>เบอร์โทรศัพท์</label>
+      <input id="phone" required type="tel" placeholder="กรอกเบอร์โทรศัพท์">
+    </div>
 
-    <label>ที่อยู่จัดส่ง</label>
-    <textarea id="address" required placeholder="บ้านเลขที่ ถนน ตำบล อำเภอ จังหวัด"></textarea>
+    <div class="form-group">
+      <label>ที่อยู่จัดส่ง</label>
+      <textarea id="address" required placeholder="บ้านเลขที่ ถนน ตำบล อำเภอ จังหวัด"></textarea>
+    </div>
 
-    <label>วิธีชำระเงิน</label>
-    <select id="payment">
-      <option value="เก็บเงินปลายทาง">เก็บเงินปลายทาง</option>
-      <option value="โอนเงินผ่านธนาคาร">โอนเงินผ่านธนาคาร</option>
-      <option value="PromptPay">PromptPay</option>
-    </select>
+    <div class="form-group">
+      <label>วิธีชำระเงิน</label>
+      <select id="payment">
+        <option value="เก็บเงินปลายทาง">เก็บเงินปลายทาง</option>
+        <option value="โอนเงินผ่านธนาคาร">โอนเงินผ่านธนาคาร</option>
+        <option value="PromptPay">PromptPay</option>
+      </select>
+    </div>
 
     <div class="total" id="checkoutTotal"></div>
 
@@ -112,16 +454,17 @@ header{padding:15px}
       ยืนยันคำสั่งซื้อ
     </button>
   </form>
-
-  <p id="orderMessage" style="font-size:12px;color:#888">
+  <p id="orderMessage" style="font-size:12px;color:#888;text-align:center;margin-top:18px">
     * คำสั่งซื้อจะถูกบันทึกลงฐานข้อมูล Supabase
   </p>
 </section>
 
-<footer>
-  <h3>BT FURNITURE</h3>
+<footer id="footer">
+  <div class="footer-logo">BT <span>FURNITURE</span></div>
+  <div class="footer-line"></div>
   <p>เฟอร์นิเจอร์ที่ทำให้บ้านเป็นบ้าน</p>
-  <p>© 2026 BT FURNITURE</p>
+  <p>ขอบคุณที่เลือกให้เราเป็นส่วนหนึ่งของบ้านคุณ</p>
+  <div class="copyright">© 2026 BT FURNITURE · ALL RIGHTS RESERVED</div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -153,7 +496,7 @@ function money(n){
 }
 
 function escapeHTML(value){
-  return String(value ?? "").replace(/[&<>"']/g, function(c){
+  return String(value ?? "").replace(/[&<>"']/g,function(c){
     return {
       "&":"&amp;",
       "<":"&lt;",
@@ -164,16 +507,15 @@ function escapeHTML(value){
   });
 }
 
-// โหลดสินค้าและตัวเลือกสีจาก Supabase
 async function loadProducts(){
   const list = document.getElementById("productList");
   list.innerHTML = '<div class="status">กำลังโหลดสินค้า...</div>';
 
-  const {data: productData, error: productError} =
+  const {data:productData,error:productError} =
     await supabaseClient
       .from("products")
       .select("id,name,description,price,color,image_front,image_side,stock,category_id")
-      .order("id", {ascending:true});
+      .order("id",{ascending:true});
 
   if(productError){
     console.error(productError);
@@ -182,20 +524,19 @@ async function loadProducts(){
     return;
   }
 
-  const {data: variantData, error: variantError} =
+  const {data:variantData,error:variantError} =
     await supabaseClient
       .from("product_variants")
       .select("product_id,color,image_url,stock");
 
-  if(variantError){
-    console.error(variantError);
-  }
+  if(variantError) console.error(variantError);
 
   const variants = variantData || [];
 
   products = (productData || []).map(p => {
-    const productVariants = variants
-      .filter(v => Number(v.product_id) === Number(p.id));
+    const productVariants = variants.filter(
+      v => Number(v.product_id) === Number(p.id)
+    );
 
     let colors = productVariants.map(v => ({
       color:v.color,
@@ -229,7 +570,6 @@ async function loadProducts(){
   renderProducts();
 }
 
-// แสดงสินค้า
 function renderProducts(){
   const list = document.getElementById("productList");
 
@@ -240,67 +580,53 @@ function renderProducts(){
 
   list.innerHTML = products.map(p => {
     const firstColor = p.colors[0];
-    const firstImage =
-      (firstColor && firstColor.image) || p.img;
+    const firstImage = (firstColor && firstColor.image) || p.img;
 
     return `
-      <div class="card">
-        <img
-          id="image${p.id}"
-          src="${escapeHTML(firstImage)}"
-          alt="${escapeHTML(p.name)}"
-          loading="lazy"
-          onerror="this.onerror=null;this.src='${escapeHTML(p.img)}'"
-        >
-
-        <h3>${escapeHTML(p.name)}</h3>
-
-        <p class="description">
-          ${escapeHTML(p.description)}
-        </p>
-
-        <p class="price">${money(p.price)}</p>
-
-        <div class="options">
-          <label>เลือกสี</label>
-
-          <select
-            id="color${p.id}"
-            onchange="changeProductColor(${p.id},this.value)"
-          >
-            ${
-              p.colors.length
-              ? p.colors.map(c =>
-                `<option value="${escapeHTML(c.color)}">${escapeHTML(c.color)}</option>`
-              ).join("")
-              : '<option value="ไม่ระบุ">ไม่ระบุ</option>'
-            }
-          </select>
-
-          <label>จำนวน</label>
-          <input
-            id="qty${p.id}"
-            type="number"
-            min="1"
-            max="99"
-            value="1"
+      <article class="card">
+        <div class="product-image">
+          <span class="product-tag">BT COLLECTION</span>
+          <img
+            id="image${p.id}"
+            src="${escapeHTML(firstImage)}"
+            alt="${escapeHTML(p.name)}"
+            loading="lazy"
+            onerror="this.onerror=null;this.src='${escapeHTML(p.img)}'"
           >
         </div>
 
-        <button onclick="addCart(${p.id})">
-          เพิ่มลงตะกร้า
-        </button>
+        <div class="card-content">
+          <h3>${escapeHTML(p.name)}</h3>
+          <p class="description">${escapeHTML(p.description)}</p>
+          <p class="price">${money(p.price)}</p>
 
-        <button class="buy" onclick="buyNow(${p.id})">
-          สั่งซื้อเลย
-        </button>
-      </div>
+          <div class="options">
+            <label>เลือกสีสินค้า</label>
+            <select id="color${p.id}" onchange="changeProductColor(${p.id},this.value)">
+              ${
+                p.colors.length
+                ? p.colors.map(c =>
+                  `<option value="${escapeHTML(c.color)}">${escapeHTML(c.color)}</option>`
+                ).join("")
+                : '<option value="ไม่ระบุ">ไม่ระบุ</option>'
+              }
+            </select>
+
+            <label>จำนวนสินค้า</label>
+            <input id="qty${p.id}" type="number" min="1" max="99" value="1">
+          </div>
+
+          <div class="card-actions">
+            <button onclick="addCart(${p.id})">เพิ่มลงตะกร้า</button>
+            <button class="buy" onclick="buyNow(${p.id})">สั่งซื้อเลย</button>
+          </div>
+        </div>
+      </article>
     `;
   }).join("");
 }
 
-// เปลี่ยนรูปตามสีที่เลือก
-function changeProductColor(id, color){
+function changeProductColor(id,color){
   const p = products.find(x => x.id === id);
   if(!p) return;
 
@@ -308,15 +634,9 @@ function changeProductColor(id, color){
   const img = document.getElementById("image" + id);
 
   if(!img) return;
-
-  if(variant && variant.image){
-    img.src = variant.image;
-  }else{
-    img.src = p.img;
-  }
+  img.src = variant && variant.image ? variant.image : p.img;
 }
 
-// เพิ่มสินค้าเข้าตะกร้า
 function addCart(id){
   const p = products.find(x => x.id === id);
   if(!p) return;
@@ -325,7 +645,7 @@ function addCart(id){
   const qtyInput = document.getElementById("qty" + id);
 
   const color = colorSelect ? colorSelect.value : "ไม่ระบุ";
-  const qty = Math.max(1, Math.min(99, Number(qtyInput.value) || 1));
+  const qty = Math.max(1,Math.min(99,Number(qtyInput.value) || 1));
 
   const found = cart.find(x => x.id === id && x.color === color);
 
@@ -353,7 +673,7 @@ function buyNow(id){
 
 function updateCart(){
   document.getElementById("count").textContent =
-    cart.reduce((s,x) => s + x.qty, 0);
+    cart.reduce((s,x) => s + x.qty,0);
 
   document.getElementById("cartItems").innerHTML =
     cart.length
@@ -365,21 +685,19 @@ function updateCart(){
         <br>
         <button onclick="changeQty(${i},-1)">−</button>
         <button onclick="changeQty(${i},1)">+</button>
-        <button onclick="removeItem(${i})">ลบ</button>
+        <button onclick="removeItem(${i})">ลบสินค้า</button>
       </div>
     `).join("")
     : "ยังไม่มีสินค้าในตะกร้า";
 
-  const sum = cart.reduce((s,x) => s + x.price * x.qty, 0);
+  const sum = cart.reduce((s,x) => s + x.price * x.qty,0);
 
-  document.getElementById("total").textContent =
-    "รวม " + money(sum);
-
-  document.getElementById("checkoutTotal").textContent =
-    "ยอดชำระ " + money(sum);
+  document.getElementById("total").textContent = "รวม " + money(sum);
+  document.getElementById("checkoutTotal").textContent = "ยอดชำระ " + money(sum);
 }
 
 function changeQty(i,n){
+  if(!cart[i]) return;
   cart[i].qty += n;
   if(cart[i].qty <= 0) cart.splice(i,1);
   updateCart();
@@ -394,7 +712,7 @@ function showCart(){
   document.getElementById("cart").classList.remove("hidden");
   document.getElementById("checkout").classList.add("hidden");
   updateCart();
-  document.getElementById("cart").scrollIntoView();
+  document.getElementById("cart").scrollIntoView({behavior:"smooth"});
 }
 
 function goCheckout(){
@@ -405,11 +723,10 @@ function goCheckout(){
 
   document.getElementById("checkout").classList.remove("hidden");
   updateCart();
-  document.getElementById("checkout").scrollIntoView();
+  document.getElementById("checkout").scrollIntoView({behavior:"smooth"});
 }
 
-// บันทึกคำสั่งซื้อจริงลง Supabase
-document.getElementById("orderForm").addEventListener("submit", async function(e){
+document.getElementById("orderForm").addEventListener("submit",async function(e){
   e.preventDefault();
 
   if(!cart.length){
@@ -444,7 +761,7 @@ document.getElementById("orderForm").addEventListener("submit", async function(e
   message.className = "";
 
   try{
-    const {data, error} = await supabaseClient.rpc(
+    const {data,error} = await supabaseClient.rpc(
       "create_guest_order",
       {
         p_customer_name:customerName,
@@ -456,23 +773,20 @@ document.getElementById("orderForm").addEventListener("submit", async function(e
     );
 
     if(error){
-      console.error("Order error:", error);
+      console.error("Order error:",error);
       throw error;
     }
 
-    if(!data){
-      throw new Error("ไม่พบเลขคำสั่งซื้อที่บันทึก");
-    }
+    if(!data) throw new Error("ไม่พบเลขคำสั่งซื้อที่บันทึก");
 
     const orderId = data;
+    const orderTotal = cart.reduce((s,x) => s + x.price * x.qty,0);
 
     alert(
       "สั่งซื้อสำเร็จแล้ว! 🎉\n\n" +
       "เลขคำสั่งซื้อ: " + orderId +
       "\nชื่อผู้รับ: " + customerName +
-      "\nยอดชำระ: " + money(
-        cart.reduce((s,x) => s + x.price * x.qty, 0)
-      ) +
+      "\nยอดชำระ: " + money(orderTotal) +
       "\n\nขอบคุณที่ใช้บริการ BT FURNITURE"
     );
 
@@ -505,7 +819,6 @@ document.getElementById("orderForm").addEventListener("submit", async function(e
   }
 });
 
-// เริ่มต้นเว็บไซต์
 updateCart();
 loadProducts();
 </script>
