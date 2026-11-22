@@ -13,6 +13,7 @@ header{background:#fff;padding:18px 6%;display:flex;align-items:center;justify-c
 .logo{font-size:23px;font-weight:bold;letter-spacing:2px}
 .logo span{color:#b49760}
 button{cursor:pointer;border:0}
+button:disabled{opacity:.6;cursor:not-allowed}
 .cart-btn,.buy{background:#b49760;color:white;padding:12px 18px;border-radius:4px}
 .hero{background:#eee8dc;text-align:center;padding:65px 15px}
 .hero p{letter-spacing:2px;color:#927b55}
@@ -107,13 +108,13 @@ header{padding:15px}
 
     <div class="total" id="checkoutTotal"></div>
 
-    <button class="cart-btn" style="width:100%" type="submit">
+    <button id="submitOrderBtn" class="cart-btn" style="width:100%" type="submit">
       ยืนยันคำสั่งซื้อ
     </button>
   </form>
 
-  <p style="font-size:12px;color:#888">
-    * ระบบตัวอย่างนี้ยังไม่ส่งคำสั่งซื้อไปยังร้านค้าจริง
+  <p id="orderMessage" style="font-size:12px;color:#888">
+    * คำสั่งซื้อจะถูกบันทึกลงฐานข้อมูล Supabase
   </p>
 </section>
 
@@ -202,8 +203,6 @@ async function loadProducts(){
       stock:v.stock
     }));
 
-    // ถ้ายังไม่มีข้อมูลตัวเลือกสีในตาราง variants
-    // จะใช้สีจากตาราง products แทน
     if(!colors.length){
       colors = String(p.color || "")
         .split(",")
@@ -409,8 +408,8 @@ function goCheckout(){
   document.getElementById("checkout").scrollIntoView();
 }
 
-// ยืนยันคำสั่งซื้อแบบทดลอง
-document.getElementById("orderForm").addEventListener("submit",function(e){
+// บันทึกคำสั่งซื้อจริงลง Supabase
+document.getElementById("orderForm").addEventListener("submit", async function(e){
   e.preventDefault();
 
   if(!cart.length){
@@ -418,21 +417,92 @@ document.getElementById("orderForm").addEventListener("submit",function(e){
     return;
   }
 
-  const order = {
-    name:document.getElementById("customerName").value,
-    phone:document.getElementById("phone").value,
-    address:document.getElementById("address").value,
-    payment:document.getElementById("payment").value,
-    items:cart,
-    total:cart.reduce((s,x) => s + x.price * x.qty, 0)
-  };
+  const submitBtn = document.getElementById("submitOrderBtn");
+  const message = document.getElementById("orderMessage");
 
-  alert(
-    "รับข้อมูลคำสั่งซื้อทดลองแล้ว\n" +
-    "ชื่อ: " + order.name +
-    "\nยอดรวม: " + money(order.total) +
-    "\n\nขณะนี้ยังไม่ได้บันทึกคำสั่งซื้อไปยังฐานข้อมูล"
-  );
+  if(submitBtn.disabled) return;
+
+  const customerName = document.getElementById("customerName").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+  const payment = document.getElementById("payment").value;
+
+  if(!customerName || !phone || !address){
+    alert("กรุณากรอกข้อมูลให้ครบ");
+    return;
+  }
+
+  const orderItems = cart.map(item => ({
+    id:item.id,
+    qty:item.qty,
+    color:item.color
+  }));
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "กำลังบันทึกคำสั่งซื้อ...";
+  message.textContent = "กรุณารอสักครู่ อย่าปิดหน้านี้";
+  message.className = "";
+
+  try{
+    const {data, error} = await supabaseClient.rpc(
+      "create_guest_order",
+      {
+        p_customer_name:customerName,
+        p_customer_phone:phone,
+        p_customer_address:address,
+        p_payment_method:payment,
+        p_items:orderItems
+      }
+    );
+
+    if(error){
+      console.error("Order error:", error);
+      throw error;
+    }
+
+    if(!data){
+      throw new Error("ไม่พบเลขคำสั่งซื้อที่บันทึก");
+    }
+
+    const orderId = data;
+
+    alert(
+      "สั่งซื้อสำเร็จแล้ว! 🎉\n\n" +
+      "เลขคำสั่งซื้อ: " + orderId +
+      "\nชื่อผู้รับ: " + customerName +
+      "\nยอดชำระ: " + money(
+        cart.reduce((s,x) => s + x.price * x.qty, 0)
+      ) +
+      "\n\nขอบคุณที่ใช้บริการ BT FURNITURE"
+    );
+
+    cart = [];
+    updateCart();
+
+    document.getElementById("orderForm").reset();
+    document.getElementById("cart").classList.add("hidden");
+    document.getElementById("checkout").classList.add("hidden");
+
+    message.textContent = "บันทึกคำสั่งซื้อเรียบร้อยแล้ว";
+    message.className = "";
+
+    window.scrollTo({top:0,behavior:"smooth"});
+
+  }catch(error){
+    console.error(error);
+
+    message.textContent = "บันทึกไม่สำเร็จ กรุณาตรวจสอบข้อมูลแล้วลองใหม่";
+    message.className = "error";
+
+    alert(
+      "บันทึกคำสั่งซื้อไม่สำเร็จ\n\n" +
+      (error.message || "กรุณาลองใหม่อีกครั้ง")
+    );
+
+  }finally{
+    submitBtn.disabled = false;
+    submitBtn.textContent = "ยืนยันคำสั่งซื้อ";
+  }
 });
 
 // เริ่มต้นเว็บไซต์
